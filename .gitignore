@@ -2,3 +2,4 @@
 vendor/
 deployer.yaml
 todo
+composer.lock
