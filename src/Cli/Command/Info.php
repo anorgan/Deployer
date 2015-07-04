@@ -34,16 +34,21 @@ EOT
 
         // List all destinations, skip "magic" before and after
         foreach ($config as $destination => $destinationConfig) {
-            if (in_array($destination, ['before', 'after'])) {
-                $output->writeln('<info>'. $destination .'</info> each destination run:');
+            if (in_array($destination, ['before'])) {
+                if ($destination === 'before') {
+                    $output->writeln('<info>'. $destination .'</info> each destination run:');
+                } else {
+                    $output->writeln('<info>Run on deploy status '. $destination .'</info>:');
+                }
             } else {
                 $output->writeln('<info>'. $destination .'</info>');
             }
 
             array_walk_recursive($destinationConfig, function($item, $key) use ($output) {
-                static $indent = 0;
                 if (is_numeric($key)) {
                     $string = ' $ ';
+                } elseif (in_array($key, ['success', 'fail'])) {
+                    $output->writeln('<info>Run on deploy status '. $key .'</info>:');
                 } else {
                     $string = $key .': ';
                 }

@@ -40,10 +40,14 @@ production:
         - git fetch origin
         - git reset --hard origin/master
 
-# Run after any destination (optional)
-after:
-    - send email with output
-    - send notification on Slack
+    # Run after any successful deploy to destination (optional)
+    success:
+        - echo "send email with output"
+        - echo "send notification on Slack"
+
+    # Run after any failure to deploy to destination (optional)
+    fail:
+        - echo "weep"
 CONFIG;
 
         if (false === file_put_contents($configFile, $config)) {
