@@ -4,9 +4,7 @@ namespace Deployer\Cli\Command;
 
 use Symfony\Component\Console\Command\Command as BaseCommand;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Yaml\Yaml;
 
 class Init extends BaseCommand
 {
@@ -25,7 +23,7 @@ EOT
     {
         $configFile = $this->getApplication()->getRoot() .'/'. \Deployer\Cli\Application::CONFIG_FILE;
         if (file_exists($configFile)) {
-//            throw new \Exception('Deployer already initialized.');
+            throw new \Exception('Deployer already initialized.');
         }
 
         $config = <<<CONFIG
