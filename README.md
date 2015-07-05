@@ -5,7 +5,7 @@ CLI tool for deployment on remote servers
 ## Instalation
 
 ```bash
-$ wget http://bit.ly/1HD5gSS -O deployer.phar
+$ wget http://bit.ly/deployer-cli -O deployer.phar
 ```
 
 ## Usage
