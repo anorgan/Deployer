@@ -1,5 +1,6 @@
 .idea/
 vendor/
 deployer.yaml
+deployer.phar
 todo
 composer.lock
