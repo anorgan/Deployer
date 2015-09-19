@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-if (!file_exists(__DIR__ . '/vendor/autoload.php')) {
+if (!file_exists(__DIR__ . '/../vendor/autoload.php')) {
     $usage = <<<EOL
 Dependencies needed before running, install with composer:
 wget http://getcomposer.org/composer.phar
@@ -11,7 +11,7 @@ EOL;
     die($usage);
 }
 
-require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 use Deployer\Cli\Application;
 

@@ -17,7 +17,10 @@
   "require-dev": {
     "phpspec/phpspec": "^2.0"
   },
-  "bin": ["deployer"],
+  "bin": ["bin/deployer"],
+  "config": {
+    "bin-dir": "bin"
+  },
   "autoload": {
     "psr-4": {
       "Deployer\\": "src/"

@@ -2,6 +2,8 @@
 
 CLI tool for deployment on remote servers
 
+[![Dependency Status](https://www.versioneye.com/user/projects/559730ce6166340022000006/badge.svg?style=flat)](https://www.versioneye.com/user/projects/559730ce6166340022000006)
+
 ## Instalation
 
 ```bash
