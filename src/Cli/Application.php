@@ -10,16 +10,16 @@ use Symfony\Component\Yaml\Yaml;
 
 class Application extends BaseApplication
 {
-    const CONFIG_FILE   = 'deployer.yaml';
-    
+    const CONFIG_FILE   = 'deployer.yml';
+
     const ROUTE_HOME        = 'home';
     const ROUTE_ENTRY       = 'entry';
     const ROUTE_CATEGORY    = 'category';
     const ROUTE_TAG         = 'tag';
-    
+
     protected $root;
     protected $config;
-    
+
     /**
      * @return array An array of default Command instances
      */
@@ -39,14 +39,14 @@ class Application extends BaseApplication
         if (null === $this->root) {
             $this->root = getcwd();
         }
-        
+
         return $this->root;
     }
 
     public function setRoot($root)
     {
         $this->root = $root;
-        
+
         return $this;
     }
 }

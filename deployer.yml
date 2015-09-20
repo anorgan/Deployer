@@ -1,0 +1,69 @@
+# Run before any destination (optional)
+before:
+  - ./vendor/bin/phpspec run 2&>1
+  - notify-send "Preparing to deploy"
+
+production:
+  app1:
+    type: ssh
+    host: grid
+    commands:
+      - cd domains/aardwarq.com && git fetch origin
+      - cd domains/aardwarq.com && git reset --hard origin/early-bird
+
+    # Run after any successful deploy to destination (optional)
+    success:
+      - echo "send email with output"
+      - echo "send notification on Slack"
+
+    # Run after any failure to deploy to destination (optional)
+    fail:
+      - echo "weep"
+
+staging:
+  servers:
+    app1:
+      host: app1.deployer.dev
+      user: deployer
+      path: /var/www/deployer.dev
+    app2:
+      host: app2.deployer.dev
+      user: deployer
+      path: /var/www/deployer.dev
+
+  steps:
+    Init: # Internal
+      # Optional, run command on all servers by default
+      servers: all
+      commands:
+        - test -e /var/www/deployer.dev.git || git clone --bare --depth 50 https://github.com/anorgan/Deployer.git /var/www/deployer.dev.git
+
+    Release: # Internal
+      # Overrides servers path for this step
+      path: /var/www/releases
+      commands:
+        - export RELEASE_VERSION=`date +%Y%m%d-%H%M%S`
+        - git clone /var/www/deployer.dev.git $RELEASE_VERSION && cd $RELEASE_VERSION
+        # Strings inside curly braces are variables
+        - git checkout {{ COMMIT_SHA }}
+        - rm -rf .git
+        - export RELEASE_PATH=$PWD
+
+    Install dependencies:
+      commands:
+        - composer install --no-dev
+
+    Tests:
+      commands:
+        - bin/phpspec run -fpretty
+
+    Migrate Database:
+      servers: app1
+      commands:
+        - echo "Running db migrations"
+
+
+    Link: # Internal
+      commands:
+        - ln -s $RELEASE_PATH {{ SERVER_PATH }}
+
