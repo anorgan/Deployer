@@ -1,0 +1,43 @@
+pkgs:
+  apache: httpd
+  ruby_package: ruby-dev
+
+php:
+  php_pkg: php
+  apc_pkg: php-pecl-apc
+  apcu_pkg: php-pecl-apcu
+  cgi_pkg: php-cgi
+  cli_pkg: php-cli
+  curl_pkg: curl
+  fpm_pkg: php-fpm
+  gd_pkg: php-gd
+  oauth_pkg: php-oauth
+  intl_pkg: php-intl
+  json_pkg: php-common
+  mbstring_pkg: php-mbstring
+  mcrypt_pkg: php-mcrypt
+  memcache_pkg: php-pecl-memcache
+  memcached_pkg: php-pecl-memcached
+  mysql_pkg: php-mysql
+  mysqlnd_pkg: php-mysqlnd
+  pear_pkg: php-pear
+  soap_pkg: php-soap
+  sqlite_pkg: php5-sqlite
+  redis_pkg: php-redis
+  fpm_service: php-fpm
+  xml_pkg: php-xml
+  imagick_pkg: php-pecl-imagick
+  suhosin_pkg: php-suhosin
+  imap_pkg: php-imap
+  adodb_pkg: php-adodb
+  pgsql_pkg: php-pgsql
+  ldap_pkg: php-ldap
+  php_ini: /etc/php.ini
+  dev_pkg: php-dev
+  mongo_pecl: mongo
+  mongo_ext: mongo.so
+  ext_conf_path: /etc/php5/conf.d
+  local_bin: /usr/local/bin
+  temp_dir: /tmp
+  composer_bin: composer
+  composer_hash: sha256=6a1ba6495f0bdb8e7735a7a76948b61c54b4a57b56837a9e9f93b4a0ac1f83a5

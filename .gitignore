@@ -3,4 +3,5 @@ vendor/
 deployer.yaml
 deployer.phar
 todo
+/.vagrant
 composer.lock
