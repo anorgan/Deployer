@@ -13,10 +13,13 @@
     "symfony/console": "^2.7",
     "symfony/process": "^2.7",
     "symfony/yaml": "^2.7",
+    "symfony/options-resolver": "^2.7",
+    "simple-bus/message-bus": "^2.2",
     "herzult/php-ssh": "^1.1"
   },
   "require-dev": {
-    "phpspec/phpspec": "^2.0"
+    "phpspec/phpspec": "^2.0",
+    "fabpot/php-cs-fixer": "^1.9"
   },
   "bin": ["bin/deployer"],
   "config": {

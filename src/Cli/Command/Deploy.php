@@ -2,6 +2,11 @@
 
 namespace Deployer\Cli\Command;
 
+use Deployer\Runner;
+use SimpleBus\Message\Bus\Middleware\FinishesHandlingMessageBeforeHandlingNext;
+use SimpleBus\Message\Bus\Middleware\MessageBusSupportingMiddleware;
+use SimpleBus\Message\Handler\DelegatesToMessageHandlerMiddleware;
+use SimpleBus\Message\Name\ClassBasedNameResolver;
 use Symfony\Component\Console\Command\Command as BaseCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -29,18 +34,20 @@ EOT
     protected function execute(InputInterface $input, OutputInterface $output)
     {
 
-        $configFile = $this->getApplication()->getRoot() .'/'. \Deployer\Cli\Application::CONFIG_FILE;
-        if (!file_exists($configFile) || !is_readable($configFile)) {
-            throw new \Exception('Can not read config file '. $configFile);
-        }
+        $config = $this->getApplication()->getConfig();
 
         $destination = $input->getArgument('destination');
 
-        $config = Yaml::parse(file_get_contents($configFile));
-
         if (!isset($config[$destination])) {
-            throw new \Exception('Destination '. $destination .' not found in '. $configFile);
+            throw new \Exception('Destination '. $destination .' not found in config');
         }
+
+        $commandBus = new MessageBusSupportingMiddleware();
+        $commandBus->appendMiddleware(new FinishesHandlingMessageBeforeHandlingNext());
+        $commandBus->appendMiddleware(new DelegatesToMessageHandlerMiddleware(new ClassBasedNameResolver()));
+
+        $deployRunner = new Runner();
+        $commandBus->handle($deployRunner);
 
         $beforeCommands = $config['before'];
         $destinationConfig = $config[$destination];

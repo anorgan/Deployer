@@ -1,24 +1,23 @@
-# Run before any destination (optional)
-before:
-  - ./vendor/bin/phpspec run 2&>1
-  - notify-send "Preparing to deploy"
-
+# Environments
 production:
-  app1:
-    type: ssh
-    host: grid
-    commands:
-      - cd domains/aardwarq.com && git fetch origin
-      - cd domains/aardwarq.com && git reset --hard origin/early-bird
+  servers:
+    app1:
+      host: app1.deployer.dev
+      user: deployer
+      path: /var/www/deployer.dev
 
-    # Run after any successful deploy to destination (optional)
-    success:
-      - echo "send email with output"
-      - echo "send notification on Slack"
+  steps:
+    Tests:
+      commands:
+        - bin/phpspec run -fpretty
 
-    # Run after any failure to deploy to destination (optional)
-    fail:
-      - echo "weep"
+  success:
+    - echo "send email with output"
+    - echo "send notification on Slack"
+
+  # Run after any failure to deploy to destination (optional)
+  fail:
+    - echo "weep"
 
 staging:
   servers:
@@ -51,7 +50,7 @@ staging:
 
     Install dependencies:
       commands:
-        - composer install --no-dev
+        - composer install
 
     Tests:
       commands:
@@ -62,8 +61,12 @@ staging:
       commands:
         - echo "Running db migrations"
 
-
     Link: # Internal
       commands:
         - ln -s $RELEASE_PATH {{ SERVER_PATH }}
 
+testing:
+  steps:
+    Test:
+      commands:
+        - bin/phpspec run -fpretty

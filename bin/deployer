@@ -14,7 +14,14 @@ EOL;
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use Deployer\Cli\Application;
+use Symfony\Component\Yaml\Yaml;
 
 $app = new Application('Deployer', 'v0.1.0');
+
+$configFile = $app->getRoot() .'/'. Application::CONFIG_FILE;
+if (file_exists($configFile) && is_readable($configFile)) {
+    $config = Yaml::parse(file_get_contents($configFile));
+    $app->setConfig($config);
+}
 
 $app->run();

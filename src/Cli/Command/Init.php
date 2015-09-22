@@ -12,7 +12,7 @@ class Init extends BaseCommand
     {
         $this
             ->setName('init')
-            ->setDescription('Initialize deploy.yaml file')
+            ->setDescription('Initialize deploy.yml file')
             ->setHelp(<<<EOT
 Setup config file
 EOT
@@ -27,27 +27,27 @@ EOT
         }
 
         $config = <<<CONFIG
-# Run before any destination (optional)
-before:
-    - phpunit
-    - codecept run acceptance
-
+# Environments
 production:
-    type: ssh
-    host: your-domain
-    commands:
-        - cd /path/to/app
-        - git fetch origin
-        - git reset --hard origin/master
+  servers:
+    app1:
+      type: ssh # local or webhook
+      host: app1.domain.com
+      user: deployer
+      path: /var/www/domain.com
 
-    # Run after any successful deploy to destination (optional)
-    success:
-        - echo "send email with output"
-        - echo "send notification on Slack"
+  steps:
+    Tests:
+      commands:
+        - bin/phpspec run -fpretty
 
-    # Run after any failure to deploy to destination (optional)
-    fail:
-        - echo "weep"
+  success:
+    - echo "send email with output"
+    - echo "send notification on Slack"
+
+  # Run after any failure to deploy to destination (optional)
+  fail:
+    - echo "weep"
 CONFIG;
 
         if (false === file_put_contents($configFile, $config)) {

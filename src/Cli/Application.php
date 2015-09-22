@@ -5,17 +5,14 @@ namespace Deployer\Cli;
 use Deployer\Cli\Command\Deploy;
 use Deployer\Cli\Command\Info;
 use Deployer\Cli\Command\Init;
+use Deployer\Config;
 use Symfony\Component\Console\Application as BaseApplication;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Yaml\Yaml;
 
 class Application extends BaseApplication
 {
     const CONFIG_FILE   = 'deployer.yml';
-
-    const ROUTE_HOME        = 'home';
-    const ROUTE_ENTRY       = 'entry';
-    const ROUTE_CATEGORY    = 'category';
-    const ROUTE_TAG         = 'tag';
 
     protected $root;
     protected $config;
@@ -48,5 +45,16 @@ class Application extends BaseApplication
         $this->root = $root;
 
         return $this;
+    }
+
+    public function getConfig()
+    {
+        return $this->config;
+    }
+
+    public function setConfig(array $config = array())
+    {
+        $resolver = new Config();
+        $this->config = $resolver->resolve($config);
     }
 }

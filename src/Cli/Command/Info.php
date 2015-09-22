@@ -25,12 +25,9 @@ EOT
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $configFile = $this->getApplication()->getRoot() .'/'. \Deployer\Cli\Application::CONFIG_FILE;
-        if (!file_exists($configFile) || !is_readable($configFile)) {
-            throw new \Exception('Can not read config file '. $configFile);
-        }
+        $config = $this->getApplication()->getConfig();
 
-        $config = Yaml::parse(file_get_contents($configFile));
+        print_r($config);
 
         // List all destinations, skip "magic" before and after
         foreach ($config as $destination => $destinationConfig) {
