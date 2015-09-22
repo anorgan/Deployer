@@ -6,11 +6,9 @@ use Symfony\Component\Console\Command\Command as BaseCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Yaml\Yaml;
 
 class Info extends BaseCommand
 {
-
     protected function configure()
     {
         $this
@@ -31,26 +29,26 @@ EOT
 
         // List all destinations, skip "magic" before and after
         foreach ($config as $destination => $destinationConfig) {
-            if (in_array($destination, ['before'])) {
+            if (in_array($destination, ['before'], true)) {
                 if ($destination === 'before') {
-                    $output->writeln('<info>'. $destination .'</info> each destination run:');
+                    $output->writeln('<info>'.$destination.'</info> each destination run:');
                 } else {
-                    $output->writeln('<info>Run on deploy status '. $destination .'</info>:');
+                    $output->writeln('<info>Run on deploy status '.$destination.'</info>:');
                 }
             } else {
-                $output->writeln('<info>'. $destination .'</info>');
+                $output->writeln('<info>'.$destination.'</info>');
             }
 
-            array_walk_recursive($destinationConfig, function($item, $key) use ($output) {
+            array_walk_recursive($destinationConfig, function ($item, $key) use ($output) {
                 if (is_numeric($key)) {
                     $string = ' $ ';
-                } elseif (in_array($key, ['success', 'fail'])) {
-                    $output->writeln('<info>Run on deploy status '. $key .'</info>:');
+                } elseif (in_array($key, ['success', 'fail'], true)) {
+                    $output->writeln('<info>Run on deploy status '.$key.'</info>:');
                 } else {
-                    $string = $key .': ';
+                    $string = $key.': ';
                 }
 
-                $output->writeln('<comment>'. $string .'</comment>'. $item);
+                $output->writeln('<comment>'.$string.'</comment>'.$item);
             });
         }
     }

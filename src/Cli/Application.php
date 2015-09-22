@@ -7,12 +7,10 @@ use Deployer\Cli\Command\Info;
 use Deployer\Cli\Command\Init;
 use Deployer\Config;
 use Symfony\Component\Console\Application as BaseApplication;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Yaml\Yaml;
 
 class Application extends BaseApplication
 {
-    const CONFIG_FILE   = 'deployer.yml';
+    const CONFIG_FILE = 'deployer.yml';
 
     protected $root;
     protected $config;
@@ -52,9 +50,9 @@ class Application extends BaseApplication
         return $this->config;
     }
 
-    public function setConfig(array $config = array())
+    public function setConfig(array $config = [])
     {
-        $resolver = new Config();
+        $resolver     = new Config();
         $this->config = $resolver->resolve($config);
     }
 }

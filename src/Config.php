@@ -33,7 +33,7 @@ class Config extends OptionsResolver
         }
     }
 
-    public function resolve(array $options = array())
+    public function resolve(array $options = [])
     {
         switch ($this->type) {
             case 'root':
@@ -44,8 +44,8 @@ class Config extends OptionsResolver
                     if (is_array($value)) {
                         $this->setDefined($item);
                         $this->setAllowedTypes($item, 'array');
-                        $nextType = $this->getNextType($item);
-                        $resolver = new self($nextType);
+                        $nextType       = $this->getNextType($item);
+                        $resolver       = new self($nextType);
                         $options[$item] = $resolver->resolve($value);
                     }
                 }
@@ -81,7 +81,7 @@ class Config extends OptionsResolver
             'servers',
             'steps',
             'success',
-            'fail'
+            'fail',
         ]);
 
         $this->setAllowedTypes('servers', 'array');
@@ -91,8 +91,8 @@ class Config extends OptionsResolver
 
         $this->setDefault('servers', [
             'localhost' => [
-                'type' => 'local'
-            ]
+                'type' => 'local',
+            ],
         ]);
         $this->setRequired('steps');
         $this->setDefault('success', []);

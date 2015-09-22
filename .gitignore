@@ -3,5 +3,6 @@ vendor/
 deployer.yaml
 deployer.phar
 todo
+/.php_cs.cache
 /.vagrant
 composer.lock

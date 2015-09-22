@@ -21,7 +21,7 @@ EOT
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $configFile = $this->getApplication()->getRoot() .'/'. \Deployer\Cli\Application::CONFIG_FILE;
+        $configFile = $this->getApplication()->getRoot().'/'.\Deployer\Cli\Application::CONFIG_FILE;
         if (file_exists($configFile)) {
             throw new \Exception('Deployer already initialized.');
         }
@@ -51,7 +51,7 @@ production:
 CONFIG;
 
         if (false === file_put_contents($configFile, $config)) {
-            throw new \Exception('Could not write to '. $configFile);
+            throw new \Exception('Could not write to '.$configFile);
         }
     }
 }
