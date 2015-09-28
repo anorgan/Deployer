@@ -4,6 +4,7 @@ namespace Deployer;
 
 use Deployer\Server\AbstractServer;
 use Deployer\Server\Local;
+use Deployer\Server\Ssh;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 

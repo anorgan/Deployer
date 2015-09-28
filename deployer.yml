@@ -68,9 +68,12 @@ staging:
 testing:
   servers:
     local:
+      host: localhost
+      user: anorgan
       path: /var/www/deployer
   steps:
     Test:
       mandatory: false
       commands:
         - bin/phpspec run -fpretty
+        - touch washere
