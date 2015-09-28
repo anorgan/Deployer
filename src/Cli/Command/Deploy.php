@@ -33,10 +33,10 @@ EOT
 
         $destination = $input->getArgument('destination');
 
-        $verbosityLevelMap = array(
+        $verbosityLevelMap = [
             LogLevel::NOTICE => OutputInterface::VERBOSITY_NORMAL,
             LogLevel::INFO   => OutputInterface::VERBOSITY_NORMAL,
-        );
+        ];
         $logger = new ConsoleLogger($output, $verbosityLevelMap);
         $config = $config[$destination];
 

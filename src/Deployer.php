@@ -45,7 +45,7 @@ class Deployer
     {
         $servers = [];
         foreach ($config['servers'] as $title => $serverConfig) {
-            $server = $this->createServerFromConfig($title, $serverConfig);
+            $server          = $this->createServerFromConfig($title, $serverConfig);
             $servers[$title] = $server;
         }
 
@@ -60,12 +60,11 @@ class Deployer
         }
 
         return $this->steps = $steps;
-
     }
 
     /**
      * @param string $title
-     * @param array $config
+     * @param array  $config
      *
      * @return AbstractServer
      */
@@ -92,8 +91,8 @@ class Deployer
 
     /**
      * @param string $title
-     * @param array $config
-     * @param array $allServers
+     * @param array  $config
+     * @param array  $allServers
      *
      * @return DeployStep
      */
@@ -105,7 +104,7 @@ class Deployer
             // Run on all servers
             $servers = array_values($allServers);
         } else {
-            $servers = [];
+            $servers           = [];
             $config['servers'] = (array) $config['servers'];
             foreach ($config['servers'] as $serverTitle) {
                 $servers[] = $allServers[$serverTitle];
@@ -131,7 +130,7 @@ class Deployer
             $logger = new NullLogger();
         }
 
-        $self = new self;
+        $self = new self();
         $self->setLogger($logger);
 
         $servers = $self->getServersFromConfig($config);

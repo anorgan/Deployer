@@ -23,14 +23,14 @@ abstract class AbstractServer
     protected $commands = [];
 
     /**
-     * @param string $title
-     * @param string $path
+     * @param string          $title
+     * @param string          $path
      * @param LoggerInterface $logger
      */
     public function __construct($title, $path, LoggerInterface $logger = null)
     {
         $this->title = $title;
-        $this->path = $path;
+        $this->path  = $path;
 
         if (null === $logger) {
             $logger = new NullLogger();

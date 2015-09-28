@@ -34,7 +34,6 @@ EOT
                 foreach ($step->getCommands() as $command) {
                     $output->writeln('  '.$command);
                 }
-
             }
         }
     }

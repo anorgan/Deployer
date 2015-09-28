@@ -27,10 +27,10 @@ class Ssh extends AbstractServer
 
     public function runCommands()
     {
-        $commands = ['cd '. $this->getPath()];
+        $commands = ['cd '.$this->getPath()];
         $commands = array_merge($commands, $this->getCommands());
         $commands = implode('; ', $commands);
-        $process = new Process($commands);
+        $process  = new Process($commands);
 
         $commandLine = $process->getCommandLine();
         $this->logger->info('Running "'.$commandLine.'"');
@@ -42,9 +42,9 @@ class Ssh extends AbstractServer
      */
     private function getSession()
     {
-        $configuration = new Configuration($this->getHostname());
+        $configuration  = new Configuration($this->getHostname());
         $authentication = new \Ssh\Authentication\Agent($this->user);
-        $session = new Session($configuration, $authentication);
+        $session        = new Session($configuration, $authentication);
 
         return $session;
     }

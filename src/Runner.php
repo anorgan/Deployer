@@ -33,7 +33,7 @@ class Runner
     }
 
     /**
-     * Run commands on every server of every step with steps' commands
+     * Run commands on every server of every step with steps' commands.
      */
     public function run()
     {
