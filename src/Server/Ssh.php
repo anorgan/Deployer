@@ -3,7 +3,6 @@
 namespace Deployer\Server;
 
 use Ssh\Configuration;
-use Ssh\SshConfigFileConfiguration;
 use Ssh\Session;
 use Symfony\Component\Process\Process;
 
