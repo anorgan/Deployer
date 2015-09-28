@@ -52,7 +52,6 @@ class Application extends BaseApplication
 
     public function setConfig(array $config = [])
     {
-        $resolver     = new Config();
-        $this->config = $resolver->resolve($config);
+        $this->config = $config;
     }
 }

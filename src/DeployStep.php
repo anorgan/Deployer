@@ -2,18 +2,21 @@
 
 namespace Deployer;
 
+use Deployer\Server\AbstractServer;
+
 class DeployStep
 {
     private $title;
     private $commands;
-    private $servers     = null;
+    private $servers;
     private $path        = null;
     private $isMandatory = true;
 
-    public function __construct($title, $commands)
+    public function __construct($title, $commands, array $servers)
     {
         $this->title = $title;
         $this->setCommands($commands);
+        $this->setServers($servers);
     }
 
     public function getTitle()
@@ -32,7 +35,7 @@ class DeployStep
     }
 
     /**
-     * @return array
+     * @return AbstractServer[]
      */
     public function getServers()
     {

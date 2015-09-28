@@ -2,30 +2,57 @@
 
 namespace Deployer;
 
+use Deployer\Server\AbstractServer;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\Process\Process;
+use Psr\Log\NullLogger;
 
 class Runner
 {
-    private $config;
-    private $logger;
+    /**
+     * @var DeployStep[]
+     */
     private $steps;
 
-    public function __construct(Config $config, LoggerInterface $logger)
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    /**
+     * @param DeployStep[]    $steps
+     * @param LoggerInterface $logger
+     */
+    public function __construct(array $steps, LoggerInterface $logger = null)
     {
-        $this->config = $config;
+        $this->steps = $steps;
+
+        if (null === $logger) {
+            $logger = new NullLogger();
+        }
         $this->logger = $logger;
-        $this->steps  = $this->config['steps'];
     }
 
+    /**
+     * Run commands on every server of every step with steps' commands
+     */
     public function run()
     {
         foreach ($this->getSteps() as $step) {
             $this->logger->info('Starting "'.$step->getTitle().'"');
-            foreach ($step->getCommands() as $command) {
-                $this->runCommand($command);
+
+            foreach ($this->getServersForStep($step) as $server) {
+                if ($step->isMandatory()) {
+                    $server->runCommands();
+                    $this->logger->info('Finished "'.$step->getTitle().'" on "'.$server->getTitle().'"');
+                } else {
+                    try {
+                        $server->runCommands();
+                        $this->logger->info('Finished "'.$step->getTitle().'" on "'.$server->getTitle().'"');
+                    } catch (\Exception $e) {
+                        $this->logger->info('Failed to run "'.$step->getTitle().'" on "'.$server->getTitle().'"');
+                    }
+                }
             }
-            $this->logger->info('Finished "'.$step->getTitle().'"');
         }
     }
 
@@ -37,10 +64,19 @@ class Runner
         return $this->steps;
     }
 
-    private function runCommand($command)
+    /**
+     * @param DeployStep $step
+     *
+     * @return AbstractServer[]
+     */
+    public function getServersForStep(DeployStep $step)
     {
-        $this->logger->info('Running "'.$command.'"');
-        $process = new Process($command);
-        $process->mustRun();
+        $servers = $step->getServers();
+        foreach ($servers as $server) {
+            $server->setLogger($this->logger);
+            $server->setCommands($step->getCommands());
+        }
+
+        return $servers;
     }
 }

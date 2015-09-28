@@ -2,6 +2,7 @@
 
 namespace spec\Deployer;
 
+use Deployer\Server\Local;
 use PhpSpec\ObjectBehavior;
 
 class DeployStepSpec extends ObjectBehavior
@@ -11,9 +12,13 @@ class DeployStepSpec extends ObjectBehavior
         'echo "test"',
     ];
 
-    public function let()
+    public function let(Local $server1, Local $server2)
     {
-        $this->beConstructedWith('Step 1', $this->commands);
+        $servers = [
+            $server1,
+            $server2
+        ];
+        $this->beConstructedWith('Step 1', $this->commands, $servers);
     }
 
     public function it_is_initializable()
