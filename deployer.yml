@@ -10,14 +10,14 @@ production:
     Tests:
       commands:
         - bin/phpspec run -fpretty
-
-  success:
-    - echo "send email with output"
-    - echo "send notification on Slack"
-
-  # Run after any failure to deploy to destination (optional)
-  fail:
-    - echo "weep"
+#
+#  success:
+#    - echo "send email with output"
+#    - echo "send notification on Slack"
+#
+#  # Run after any failure to deploy to destination (optional)
+#  fail:
+#    - echo "weep"
 
 staging:
   servers:

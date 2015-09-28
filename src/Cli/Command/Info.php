@@ -2,6 +2,7 @@
 
 namespace Deployer\Cli\Command;
 
+use Deployer\Deployer;
 use Symfony\Component\Console\Command\Command as BaseCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -25,31 +26,16 @@ EOT
     {
         $config = $this->getApplication()->getConfig();
 
-        print_r($config);
-
-        // List all destinations, skip "magic" before and after
         foreach ($config as $destination => $destinationConfig) {
-            if (in_array($destination, ['before'], true)) {
-                if ($destination === 'before') {
-                    $output->writeln('<info>'.$destination.'</info> each destination run:');
-                } else {
-                    $output->writeln('<info>Run on deploy status '.$destination.'</info>:');
+            $deployRunner = Deployer::create($destinationConfig);
+            $output->writeln('<info>'.$destination.'</info>:');
+            foreach ($deployRunner->getSteps() as $step) {
+                $output->writeln('<comment>'.$step->getTitle().'</comment>');
+                foreach ($step->getCommands() as $command) {
+                    $output->writeln('  '.$command);
                 }
-            } else {
-                $output->writeln('<info>'.$destination.'</info>');
+
             }
-
-            array_walk_recursive($destinationConfig, function ($item, $key) use ($output) {
-                if (is_numeric($key)) {
-                    $string = ' $ ';
-                } elseif (in_array($key, ['success', 'fail'], true)) {
-                    $output->writeln('<info>Run on deploy status '.$key.'</info>:');
-                } else {
-                    $string = $key.': ';
-                }
-
-                $output->writeln('<comment>'.$string.'</comment>'.$item);
-            });
         }
     }
 }

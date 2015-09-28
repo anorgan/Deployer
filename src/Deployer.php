@@ -106,6 +106,7 @@ class Deployer
             $servers = array_values($allServers);
         } else {
             $servers = [];
+            $config['servers'] = (array) $config['servers'];
             foreach ($config['servers'] as $serverTitle) {
                 $servers[] = $allServers[$serverTitle];
             }
