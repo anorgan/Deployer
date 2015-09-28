@@ -73,7 +73,7 @@ testing:
       path: /var/www/deployer
   steps:
     Test:
-      mandatory: false
+      mandatory: true
       commands:
         - bin/phpspec run -fpretty
         - touch washere

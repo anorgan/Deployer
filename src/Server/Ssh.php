@@ -2,6 +2,7 @@
 
 namespace Deployer\Server;
 
+use Ssh\Configuration;
 use Ssh\SshConfigFileConfiguration;
 use Ssh\Session;
 use Symfony\Component\Process\Process;
@@ -27,8 +28,9 @@ class Ssh extends AbstractServer
 
     public function runCommands()
     {
-        $commands = implode('; ', $this->getCommands());
-        $this->logger->info('Running "'.$commands.'"');
+        $commands = ['cd '. $this->getPath()];
+        $commands = array_merge($commands, $this->getCommands());
+        $commands = implode('; ', $commands);
         $process = new Process($commands);
 
         $commandLine = $process->getCommandLine();
@@ -41,8 +43,9 @@ class Ssh extends AbstractServer
      */
     private function getSession()
     {
-        $configuration = new SshConfigFileConfiguration(getenv('HOME').'/~ssh/config', $this->getHostname());
-        $session = new Session($configuration);
+        $configuration = new Configuration($this->getHostname());
+        $authentication = new \Ssh\Authentication\Agent($this->user);
+        $session = new Session($configuration, $authentication);
 
         return $session;
     }
