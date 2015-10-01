@@ -25,26 +25,27 @@ $ php deployer.phar init
 Creates something like:
 
 ```yaml
-# Run before any destination (optional)
-before:
-    - ./vendor/bin/phpspec run
-    - notify-send "Preparing to deploy"
-
+# Environments
 production:
-    type: ssh
-    host: hostname
-    commands:
-        - cd path/to/app && git fetch origin
-        - cd path/to/app && git reset --hard origin/master
+  servers:
+    app1:
+      type: ssh # local or webhook
+      host: app1.domain.com
+      user: deployer
+      path: /var/www/domain.com
 
-    # Run after any successful deploy to destination (optional)
-    success:
-        - echo "send email with output"
-        - echo "send notification on Slack"
+  steps:
+    Tests:
+      commands:
+        - bin/phpspec run -fpretty
 
-    # Run after any failure to deploy to destination (optional)
-    fail:
-        - echo "weep"
+  success:
+    - echo "send email with output"
+    - echo "send notification on Slack"
+
+  # Run after any failure to deploy to destination (optional)
+  fail:
+    - echo "weep"
 ```
 
 ## Requirements
