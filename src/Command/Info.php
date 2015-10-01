@@ -2,7 +2,7 @@
 
 namespace Deployer\Cli\Command;
 
-use Deployer\Deployer;
+use Deployer\Common\Deployer;
 use Symfony\Component\Console\Command\Command as BaseCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

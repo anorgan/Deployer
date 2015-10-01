@@ -2,8 +2,7 @@
 
 namespace Deployer\Cli\Command;
 
-use Deployer\Config;
-use Deployer\Deployer;
+use Deployer\Common\Deployer;
 use Psr\Log\LogLevel;
 use Symfony\Component\Console\Command\Command as BaseCommand;
 use Symfony\Component\Console\Input\InputArgument;

@@ -10,14 +10,13 @@
   ],
   "require": {
     "php": ">=5.4.0",
+    "anorgan/deployer-common": "*@dev",
     "psr/log": "^1.0.0",
     "symfony/console": "^2.7",
     "symfony/process": "^2.7",
-    "symfony/yaml": "^2.7",
-    "herzult/php-ssh": "^1.1"
+    "symfony/yaml": "^2.7"
   },
   "require-dev": {
-    "phpspec/phpspec": "^2.0",
     "fabpot/php-cs-fixer": "^1.9"
   },
   "bin": ["bin/deployer"],
@@ -26,7 +25,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Deployer\\": "src/"
+      "Deployer\\Cli\\": "src/"
     }
   }
 }

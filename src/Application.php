@@ -5,7 +5,6 @@ namespace Deployer\Cli;
 use Deployer\Cli\Command\Deploy;
 use Deployer\Cli\Command\Info;
 use Deployer\Cli\Command\Init;
-use Deployer\Config;
 use Symfony\Component\Console\Application as BaseApplication;
 
 class Application extends BaseApplication
