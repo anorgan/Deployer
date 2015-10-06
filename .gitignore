@@ -3,3 +3,4 @@ vendor/
 deployer.yaml
 deployer.phar
 /.php_cs.cache
+/bin/php-cs-fixer
