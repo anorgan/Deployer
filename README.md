@@ -2,7 +2,7 @@
 
 CLI tool for deployment on remote servers
 
-[![Dependency Status](https://www.versioneye.com/user/projects/559730ce6166340022000006/badge.svg?style=flat)](https://www.versioneye.com/user/projects/559730ce6166340022000006)
+[![Dependency Status](https://www.versioneye.com/user/projects/5609422e5a262f0022000200/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5609422e5a262f0022000200)
 
 ## Instalation
 
