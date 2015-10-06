@@ -13,19 +13,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/anorgan/deployer-common.git",
-                "reference": "a9b98a5021baf34483e91dbc055f7472335f7eb9"
+                "reference": "5bafb041cc00d4d1b2f9322f0960ded8e52451af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/anorgan/deployer-common/zipball/a9b98a5021baf34483e91dbc055f7472335f7eb9",
-                "reference": "a9b98a5021baf34483e91dbc055f7472335f7eb9",
+                "url": "https://api.github.com/repos/anorgan/deployer-common/zipball/5bafb041cc00d4d1b2f9322f0960ded8e52451af",
+                "reference": "5bafb041cc00d4d1b2f9322f0960ded8e52451af",
                 "shasum": ""
             },
             "require": {
                 "herzult/php-ssh": "^1.1",
                 "php": ">=5.4.0",
                 "psr/log": "^1.0.0",
-                "symfony/console": "^2.7",
                 "symfony/process": "^2.7"
             },
             "require-dev": {
@@ -49,7 +48,7 @@
                 }
             ],
             "description": "Common package for deployer CLI and web interface",
-            "time": "2015-10-01 21:53:36"
+            "time": "2015-10-01 23:01:32"
         },
         {
             "name": "herzult/php-ssh",

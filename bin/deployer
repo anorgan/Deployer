@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
-
-if (!file_exists(__DIR__ . '/../vendor/autoload.php')) {
+$autoloadFile = __DIR__ . '/../vendor/autoload.php';
+if (!file_exists($autoloadFile)) {
     $usage = <<<EOL
 Dependencies needed before running, install with composer:
 wget http://getcomposer.org/composer.phar
@@ -11,12 +11,12 @@ EOL;
     die($usage);
 }
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once $autoloadFile;
 
 use Deployer\Cli\Application;
 use Symfony\Component\Yaml\Yaml;
 
-$app = new Application('Deployer', 'v0.1.0');
+$app = new Application('Deployer', 'v0.2.0');
 
 $configFile = $app->getRoot() .'/'. Application::CONFIG_FILE;
 if (file_exists($configFile) && is_readable($configFile)) {
