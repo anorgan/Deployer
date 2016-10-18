@@ -1,10 +1,10 @@
 <?php
 
-namespace Deployer\Cli;
+namespace Anorgan\Deployer\Cli;
 
-use Deployer\Cli\Command\Deploy;
-use Deployer\Cli\Command\Info;
-use Deployer\Cli\Command\Init;
+use Anorgan\Deployer\Cli\Command\Deploy;
+use Anorgan\Deployer\Cli\Command\Info;
+use Anorgan\Deployer\Cli\Command\Init;
 use Symfony\Component\Console\Application as BaseApplication;
 
 class Application extends BaseApplication

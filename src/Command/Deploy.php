@@ -1,8 +1,8 @@
 <?php
 
-namespace Deployer\Cli\Command;
+namespace Anorgan\Deployer\Cli\Command;
 
-use Deployer\Common\Deployer;
+use Anorgan\Deployer\Common\Deployer;
 use Psr\Log\LogLevel;
 use Symfony\Component\Console\Command\Command as BaseCommand;
 use Symfony\Component\Console\Input\InputArgument;
@@ -20,7 +20,7 @@ class Deploy extends BaseCommand
             ->setName('deploy')
             ->setDescription('Deploy to defined destinations')
             ->addArgument('destination', InputArgument::OPTIONAL, 'Where to deploy? Name of the destination in config file', self::DEFAULT_DESTINATION)
-            ->setHelp(<<<EOT
+            ->setHelp(<<<'EOT'
 Deploy to destination
 EOT
             );

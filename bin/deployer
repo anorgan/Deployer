@@ -13,7 +13,7 @@ EOL;
 
 require_once $autoloadFile;
 
-use Deployer\Cli\Application;
+use Anorgan\Deployer\Cli\Application;
 use Symfony\Component\Yaml\Yaml;
 
 $app = new Application('Deployer', 'v0.2.0');

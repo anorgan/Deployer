@@ -1,6 +1,6 @@
 <?php
 
-namespace Deployer\Cli\Command;
+namespace Anorgan\Deployer\Cli\Command;
 
 use Symfony\Component\Console\Command\Command as BaseCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -13,7 +13,7 @@ class Init extends BaseCommand
         $this
             ->setName('init')
             ->setDescription('Initialize deploy.yml file')
-            ->setHelp(<<<EOT
+            ->setHelp(<<<'EOT'
 Setup config file
 EOT
             );
@@ -26,7 +26,7 @@ EOT
             throw new \Exception('Deployer already initialized.');
         }
 
-        $config = <<<CONFIG
+        $config = <<<'CONFIG'
 # Environments
 production:
   servers:

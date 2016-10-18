@@ -1,8 +1,8 @@
 <?php
 
-namespace Deployer\Cli\Command;
+namespace Anorgan\Deployer\Cli\Command;
 
-use Deployer\Common\Deployer;
+use Anorgan\Deployer\Common\Deployer;
 use Symfony\Component\Console\Command\Command as BaseCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -16,7 +16,7 @@ class Info extends BaseCommand
             ->setName('info')
             ->setDescription('Show defined destinations with their parameters')
             ->addArgument('destination', InputArgument::OPTIONAL, 'Show only info for this destination')
-            ->setHelp(<<<EOT
+            ->setHelp(<<<'EOT'
 Show defined destinations
 EOT
             );
